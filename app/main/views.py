@@ -1,7 +1,7 @@
 import markdown2
 from flask import render_template,request,redirect,url_for,abort
 from . import main
-from ..requests import get_movies,get_movie,search_movie
+# from ..requests import get_movies,get_movie,search_movie
 from .forms import ReviewForm,UpdateProfile
 from .. import db,photos
 from ..models import Review, User
@@ -19,18 +19,18 @@ def index():
     '''
 
     # Getting popular movie
-    popular_movies = get_movies('popular')
-    upcoming_movie = get_movies('upcoming')
-    now_showing_movie = get_movies('now_playing')
+    # popular_movies = get_movies('popular')
+    # upcoming_movie = get_movies('upcoming')
+    # now_showing_movie = get_movies('now_playing')
 
     title = 'Home - Welcome to The best Movie Review Website Online'
 
-    search_movie = request.args.get('movie_query')
+    # search_movie = request.args.get('movie_query')
 
-    if search_movie:
-        return redirect(url_for('.search',movie_name=search_movie))
-    else:
-        return render_template('index.html', title = title, popular = popular_movies, upcoming = upcoming_movie, now_showing = now_showing_movie )
+    # if search_movie:
+    #     return redirect(url_for('.search',movie_name=search_movie))
+    
+    return render_template('index.html', title = title)
 
 
 @main.route('/movie/<int:id>')
