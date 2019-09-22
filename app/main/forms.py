@@ -4,10 +4,10 @@ from wtforms.validators import Required,Email
 from wtforms import ValidationError
 
 class PitchForm(FlaskForm):
-    title = StringField('title',validators=[Required()])
-    description = TextAreaField("What would you like to pitch?",validators=[Required()])
+    title = StringField('Title',validators=[Required()])
+    description = TextAreaField("Tell us about your pitch",validators=[Required()])
     category = RadioField('Label', choices=[ ('pickup','pickup'), ('interview','interview'),('promotion','promotion'),('product','product')],validators=[Required()])
-    submit = SubmitField('Submit')
+    submit = SubmitField('Post the pitch')
 
 
 class CommentForm(FlaskForm):
