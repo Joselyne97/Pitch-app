@@ -1,40 +1,16 @@
-{% extends 'base.html'%}
-{% import 'macros.html' as macro%}
-
-<!-- Styles block -->
-
-{% block styles%}
-    {{ super() }}
-    <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
-{% endblock %}
-<!-- Content block -->
+{% extends 'base.html'%} 
 {% block content %}
-
-<div class="container">
-    {% if current_user.is_authenticated%}
-        <h1>Hello {{current_user.username}}</h1>
-    {% else %}
-       <h1>Hello stranger</h1>
-    {%endif%}
-    
-    <!-- <form>
-        <input type="text" name="movie_query" placeholder="Search for a Movie" class="form-control">
-        <input type="submit"  value="Submit" class="btn btn-default">
-    </form> -->
-
-    <ul>
-        {% if current_user.is_authenticated %}
-        <li><a href="{{url_for('main.profile',uname=current_user.username)}}">Profile</a></li>
-        <li><a href="{{url_for('auth.logout')}}">Sign out</a></li>
-        {% else %}
-        <li><a href="{{url_for('auth.login')}}">Sign in</a></li>
-        {%endif%}
-      </ul>
+<div class="container-fluid welcome-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 welcome">
+                {% if current_user.is_authenticated%}
+                <a id="start" class="btn btn-danger animated infinite flash" href="{{url_for('category.index')}}">See all Pitches</a>
+                {% else %}
+                <a id="start" class="btn btn-danger animated infinite flash" href="{{url_for('auth.login')}}">Sign In</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 </div>
-
-
-
-
-
-
-{% endblock%}
+{% endblock %}
