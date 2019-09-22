@@ -3,20 +3,22 @@
 	{% if category_list %}
 		{% for category in category_list %}
 		<div class="col-md-6">
-			<div class="thumbnail text-center">
-			<h5 class="card-header">{{category.title}}</h5>
-			<h5 class="card-header">{{category.category}}</h5>
-			<div class="card-body">
+			<div class="card text-center">
+					<div class="card text-white bg-dark mb-3" style="max-width: 100px; max-height: 100px">
+				<div class="card-body">
+			<h5 class="card-title">{{category.title}}</h5>
+			<h5 class="card-subtitle mb-2 text-muted">{{category.category}}</h5>
+			
 				<blockquote class="blockquote mb-0">
-					<h2>{{category.description}}</h2>
+					<div class="card-text"><h3>{{category.description}}</h3></div>
 					<footer class="blockquote-footer"> Posted by {{category.user.username}}</footer>
 				</blockquote>
 				
-				<a href="{{url_for('main.new_comment',pitch_id = category.id)}}" class="btn btn-info"> Add a comment</a>
+				<a href="{{url_for('main.new_comment',pitch_id = category.id)}}" class="btn btn-primary"> Add a comment</a>
 				<a href="{{url_for('main.upvote',pitch_id = category.id)}}" class= "btn btn-primary btn-sm"><i></i>Like <span>{{category.upvotes.count()}}</span></a>
 				<a href="{{url_for('main.downvote',pitch_id = category.id)}}" class= "btn btn-danger btn-sm"><i class="far fa-thumbs-up"></i>Dislike <span>{{category.downvotes.count()}}</span></a>
 
-
+				</div>
 			</div>
 		</div>
 
