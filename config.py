@@ -7,7 +7,7 @@ class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY')
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://wecode:joselyne@localhost/pitch'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    UPLOADED_PHOTOS_DEST ='app/static/photos'
+    
 
     #  email configurations
     MAIL_SERVER = 'smtp.googlemail.com'
@@ -18,7 +18,7 @@ class Config:
     # simple mde  configurations
     SIMPLEMDE_JS_IIFE = True
     SIMPLEMDE_USE_CDN = True
-    SUBJECT_PREFIX = 'Watchlist'
+    SUBJECT_PREFIX = 'Pitch-app'
     SENDER_EMAIL = 'joselynejojo740@gmail.com'
 
     @staticmethod
@@ -26,7 +26,7 @@ class Config:
         pass
 
 class TestConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://wecode:joselyne@localhost/test_watchlist'
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://wecode:joselyne@localhost/pitch_test'
 
 
 class ProdConfig(Config):
