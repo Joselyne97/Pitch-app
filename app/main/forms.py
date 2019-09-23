@@ -9,6 +9,9 @@ class PitchForm(FlaskForm):
     category = RadioField('Label', choices=[ ('pickup','pickup'), ('interview','interview'),('promotion','promotion'),('product','product')],validators=[Required()])
     submit = SubmitField('Post the pitch')
 
+class UpdateProfile(FlaskForm):
+    bio = TextAreaField('Tell us about you.',validators = [Required()])
+    submit = SubmitField('Submit')
 
 class CommentForm(FlaskForm):
 	description = TextAreaField('Add comment',validators=[Required()])
@@ -20,3 +23,4 @@ class UpvoteForm(FlaskForm):
 
 class Downvote(FlaskForm):
 	submit = SubmitField()
+

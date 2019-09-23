@@ -1,11 +1,10 @@
 import markdown2
 from flask import render_template,request,redirect,url_for,abort, flash
 from . import main
-from .forms import PitchForm, CommentForm, UpvoteForm
-from .. import db
+from .forms import PitchForm, CommentForm, UpvoteForm, UpdateProfile
+from .. import db, photos
 from ..models import Pitch, User,Comment,Upvote,Downvote
 from flask_login import login_required, current_user
-from flask.views import View,MethodView
 
 
 
@@ -31,13 +30,10 @@ def index():
 
     return render_template('category.html', title = title, pitch = pitch, pickup = pickup, interview = interview, promotion = promotion, product = product)
 
-
-
 @main.route('/pitches/new/', methods = ['GET', 'POST'])
 @login_required
 def new_pitch():
     form = PitchForm()
-    my_upvotes = Upvote.query.filter_by(pitch_id = Pitch.id)
 
     if form.validate_on_submit():
        description = form.description.data
@@ -68,6 +64,39 @@ def new_comment(pitch_id):
 
     all_comments = Comment.query.filter_by(pitch_id = pitch_id).all()
     return render_template('comment.html', form = form, comment = all_comments, pitch = pitch )
+
+
+@main.route('/user/<uname>')
+@login_required
+def profile(uname):
+    user = User.query.filter_by(username = uname).first()
+    get_pitches = Pitch.query.filter_by(owner_id = current_user.id).all()
+
+    if user is None:
+        abort(404)
+
+    return render_template("profile/profile.html", user = user, description = get_pitches)
+
+
+
+@main.route('/user/<uname>/update',methods = ['GET','POST'])
+def update_profile(uname):
+    user = User.query.filter_by(username = uname).first()
+    if user is None:
+        abort(404)
+
+    form = UpdateProfile()
+
+    if form.validate_on_submit():
+        user.bio = form.bio.data
+
+        db.session.add(user)
+        db.session.commit()
+
+        return redirect(url_for('.profile',uname=user.username))
+
+    return render_template('profile/update.html',form =form)
+
 
 
 @main.route('/pitch/upvote/<int:pitch_id>/upvote', methods = ['GET', 'POST'])

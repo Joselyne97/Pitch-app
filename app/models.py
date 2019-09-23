@@ -5,6 +5,13 @@ from . import login_manager
 from datetime import datetime
 from sqlalchemy.sql import func
 
+class PhotoProfile(db.Model):
+    __tablename__ = 'profile_photos'
+
+    id = db.Column(db.Integer,primary_key = True)
+    pic_path = db.Column(db.String())
+    user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
+
 
 class User(UserMixin,db.Model):
     __tablename__ = 'users'
@@ -12,13 +19,16 @@ class User(UserMixin,db.Model):
     username = db.Column(db.String(255))
     email = db.Column(db.String(255),unique = True,index = True)
     pitch = db.relationship('Pitch', backref='user', lazy='dynamic')
+    role_id = db.Column(db.Integer,db.ForeignKey('roles.id'))
+    bio = db.Column(db.String(255))
+    profile_pic_path = db.Column(db.String())
     password_secure = db.Column(db.String(255))
     pass_secure = db.Column(db.String(255))
     password_hash = db.Column(db.String(255))
     comment = db.relationship('Comment', backref = 'user', lazy = 'dynamic')
     upvotes = db.relationship('Upvote', backref = 'user', lazy = 'dynamic')
     downvotes = db.relationship('Downvote', backref = 'user', lazy = 'dynamic')
-
+    photos = db.relationship('PhotoProfile',backref = 'user',lazy = "dynamic")
 
     @login_manager.user_loader
     def load_user(user_id):
@@ -73,7 +83,7 @@ class Comment(db.Model):
     pitch_id = db.Column(db.Integer, db.ForeignKey('pitches.id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable= False)
     description = db.Column(db.Text)
-
+    
     
     def __repr__(self):
         return f"Comment : id: {self.id} comment: {self.description}"
@@ -141,4 +151,13 @@ class Downvote(db.Model):
         return f'{self.user_id}:{self.pitch_id}'
 
 
+class Role(db.Model):
+    __tablename__ = 'roles'
+
+    id = db.Column(db.Integer,primary_key = True)
+    name = db.Column(db.String(255))
+    users = db.relationship('User',backref = 'role',lazy="dynamic")
+
+    def __repr__(self):
+        return f'User {self.name}'
 
