@@ -15,7 +15,7 @@ Joselyne MPAYIMANA
 
 ## Project description:
 
- We were required to Create an application that will allow users to use one minute wisely to impress others by saying something something meaningful. The users will submit their one minute pitches and other users will vote on them and leave comments to give their feedback on them.
+ We were required to Create an application that will allow users to use one minute wisely to impress others by saying something meaningful. The users will submit their one minute pitches and other users will vote on them and leave comments to give their feedback on them.
 
  ## Technology used:
 
@@ -23,7 +23,7 @@ Joselyne MPAYIMANA
 
  ## Link of the website is:
 
- ...........
+https://pitches-app.herokuapp.com/
 
  ## Copyright and license information:
 
