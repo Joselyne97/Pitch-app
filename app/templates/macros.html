@@ -7,9 +7,9 @@
 			<div class="thumbnail text-center">
 					
 				<div class="card">
-			<h1 class="card-title" style="margin-left: 300px; margin-right:300px;font-size: 30px;">{{category.title}}</h1>
+			<h1 class="card-title" style="margin-left: 200px; margin-right:300px;font-size: 30px;">{{category.title}}</h1>
 			<p>
-					<div class="card-text" style="margin-right:300px; margin-left: 150px;font-size: 30px;"><h2>{{category.description}}</h2></div>
+					<div class="card-text" style="font-size: 30px;"><h2>{{category.description}}</h2></div>
 					<cite style="margin-left:300px; font-size: 25px;">Posted by {{category.user.username}}</cite>
 				</p>
 				
@@ -36,14 +36,14 @@
 			{% for comment in comments %}
 				<div class="thumbnail text-center" style="font-family: Great Vibes;font-size: 50px;">
 					<div class="card">
-						<a><p style="color: whitesmoke">{{ comment.description }}</p></a>
+						<a><p style="color:black">{{ comment.description }}</p></a>
 						<small> posted by {{comment.user.username}}</small>
 				</div>
 			</div>
 			{% endfor %}
 			{% else %}
 
-			<h3 style="color: whitesmoke">This post does  not does not have any comments yet !</h3>
+			<h3 style="color:black">This post does  not does not have any comments yet !</h3>
 			{%endif%}
 
 	</ul>
